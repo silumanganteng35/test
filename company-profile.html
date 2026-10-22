@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Profile | JSP INDUSTRIES</title>
+  <meta name="description" content="Company Profile resmi JSP INDUSTRIES by Joglo Screenprinting - Apparel Manufacturing & Screen Printing Solutions, Blitar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:  #0a0a0a;
+      --dark:   #111111;
+      --gold:   #F5C518;
+      --yellow: #FFD600;
+      --red:    #C0392B;
+      --white:  #ffffff;
+      --gray:   #777777;
+      --card:   #161616;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    .cp-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      height: 64px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(245,197,24,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .nav-logo-name {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      line-height: 1;
+    }
+    .nav-logo-name em { color: var(--yellow); font-style: normal; }
+    .nav-logo-sub {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 20px;
+      border: 1.5px solid rgba(245,197,24,0.35);
+      border-radius: 50px;
+      transition: all 0.25s ease;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .nav-back:hover {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--yellow);
+      transform: translateX(-2px);
+    }
+    .nav-back svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ===== HERO HEADER ===== */
+    .cp-header {
+      margin-top: 64px;
+      padding: 64px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #0d0d0d, var(--black));
+    }
+    .cp-header::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 300px;
+      background: radial-gradient(ellipse at center, rgba(245,197,24,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cp-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.3);
+      color: var(--gold);
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .cp-header h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .cp-header h1 em { color: var(--yellow); font-style: normal; }
+    .cp-header p {
+      font-size: clamp(13px, 2vw, 16px);
+      color: var(--gray);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .cp-page-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+    .cp-page-count span {
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    /* ===== PAGES CONTAINER ===== */
+    .cp-pages {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ===== SINGLE PAGE CARD ===== */
+    .cp-page-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .cp-page-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 36px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,197,24,0.2);
+    }
+    /* Gold accent border top */
+    .cp-page-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow), var(--red), var(--yellow));
+      z-index: 2;
+    }
+    /* Page number badge */
+    .page-num {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 3;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(245,197,24,0.3);
+    }
+    .cp-page-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      image-rendering: auto;
+    }
+    /* Loading placeholder */
+    .cp-page-card img[data-src] {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .cp-page-card img.loaded { opacity: 1; }
+
+    /* ===== CTA SECTION ===== */
+    .cp-cta {
+      padding: 64px 24px 72px;
+      text-align: center;
+      background: linear-gradient(to bottom, var(--black), #0d0900);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .cp-cta h2 {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 900;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .cp-cta h2 em { color: var(--yellow); font-style: normal; }
+    .cp-cta p {
+      color: var(--gray);
+      font-size: 15px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--yellow);
+      color: var(--black);
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,214,0,0.4); }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      transition: all 0.3s;
+    }
+    .btn-back:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* ===== FOOTER ===== */
+    .cp-foot {
+      background: #050505;
+      border-top: 3px solid var(--yellow);
+      padding: 28px 40px;
+    }
+    .cp-foot-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .foot-brand { font-size: 15px; font-weight: 900; letter-spacing: -0.5px; }
+    .foot-brand em { color: var(--yellow); font-style: normal; }
+    .foot-info { font-size: 12px; color: var(--gray); }
+
+    /* ===== BACK TO TOP ===== */
+    .back-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 990;
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      color: var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 18px;
+      box-shadow: 0 6px 20px rgba(255,214,0,0.4);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .back-top.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .back-top:hover { transform: translateY(-3px); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .cp-nav { padding: 0 16px; }
+      .nav-logo-name { font-size: 14px; }
+      .cp-header { padding: 48px 16px 36px; }
+      .cp-pages { padding: 16px 12px 60px; gap: 20px; }
+      .cp-cta { padding: 48px 20px 56px; }
+      .cp-foot { padding: 24px 16px; }
+      .cp-foot-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ===== FADE IN ANIMATION ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .cp-chip { animation: fadeUp 0.5s ease both; }
+    .cp-header h1 { animation: fadeUp 0.6s 0.1s ease both; }
+    .cp-header p  { animation: fadeUp 0.6s 0.2s ease both; }
+    .cp-page-count { animation: fadeUp 0.6s 0.3s ease both; }
+
+    /* Intersection Observer fade */
+    .cp-page-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.35s ease;
+    }
+    .cp-page-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cp-page-card.visible:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="cp-nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-name"><em>JSP</em> INDUSTRIES</span>
+      <span class="nav-logo-sub">by Joglo Screenprinting</span>
+    </a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Home
+    </a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="cp-header">
+    <div class="cp-chip">&#128196; Company Profile Resmi</div>
+    <h1><em>JSP</em> INDUSTRIES</h1>
+    <p>by Joglo Screenprinting &mdash; Apparel Manufacturing &amp; Screen Printing Solutions, Blitar</p>
+    <div class="cp-page-count">
+      <span>12</span> Halaman Company Profile
+    </div>
+  </header>
+
+  <!-- PAGES -->
+  <main class="cp-pages" id="cp-pages">
+
+    <div class="cp-page-card">
+      <span class="page-num">01 / 12</span>
+      <img src="company%20profil/Halaman_01_Portrait.png" alt="Company Profile JSP Industries Halaman 1" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">02 / 12</span>
+      <img src="company%20profil/Halaman_02_Portrait.png" alt="Company Profile JSP Industries Halaman 2" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">03 / 12</span>
+      <img src="company%20profil/Halaman_03_Portrait.png" alt="Company Profile JSP Industries Halaman 3" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">04 / 12</span>
+      <img src="company%20profil/Halaman_04_Portrait.png" alt="Company Profile JSP Industries Halaman 4" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">05 / 12</span>
+      <img src="company%20profil/Halaman_05_Portrait.png" alt="Company Profile JSP Industries Halaman 5" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">06 / 12</span>
+      <img src="company%20profil/Halaman_06_Portrait.png" alt="Company Profile JSP Industries Halaman 6" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">07 / 12</span>
+      <img src="company%20profil/Halaman_07_Portrait.png" alt="Company Profile JSP Industries Halaman 7" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">08 / 12</span>
+      <img src="company%20profil/Halaman_08_Portrait.png" alt="Company Profile JSP Industries Halaman 8" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">09 / 12</span>
+      <img src="company%20profil/Halaman_09_Portrait.png" alt="Company Profile JSP Industries Halaman 9" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">10 / 12</span>
+      <img src="company%20profil/Halaman_10_Portrait.png" alt="Company Profile JSP Industries Halaman 10" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">11 / 12</span>
+      <img src="company%20profil/Halaman_11_Portrait.png" alt="Company Profile JSP Industries Halaman 11" loading="lazy" />
+    </div>
+
+    <div class="cp-page-card">
+      <span class="page-num">12 / 12</span>
+      <img src="company%20profil/Halaman_12_Portrait.png" alt="Company Profile JSP Industries Halaman 12" loading="lazy" />
+    </div>
+
+  </main>
+
+  <!-- CTA -->
+  <section class="cp-cta">
+    <h2>Tertarik Bekerja Sama<br><em>Bersama JSP Industries?</em></h2>
+    <p>Konsultasi gratis, pengerjaan profesional, harga kompetitif.<br>Hubungi kami sekarang dan dapatkan penawaran terbaik.</p>
+    <div class="btn-group">
+      <a href="https://wa.me/6282228106342?text=Halo%20JSP%20Industries,%20saya%20tertarik%20setelah%20melihat%20company%20profile%20Anda.%20Boleh%20saya%20konsultasi?" target="_blank" rel="noopener" class="btn-wa">
+        &#128172; WhatsApp Sekarang
+      </a>
+      <a href="index.html" class="btn-back">
+        &#127968; Kembali ke Beranda
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="cp-foot">
+    <div class="cp-foot-inner">
+      <div class="foot-brand"><em>JSP</em> INDUSTRIES &mdash; by Joglo Screenprinting</div>
+      <div class="foot-info">Pagerwojo, Blitar, Jawa Timur &bull; +62 822-2810-6342 &bull; www.jspindustries.com</div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <a href="#" class="back-top" id="backTop" title="Kembali ke atas">&#8679;</a>
+
+  <script>
+    // Intersection Observer — fade-in cards as they scroll into view
+    const cards = document.querySelectorAll('.cp-page-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(c => obs.observe(c));
+
+    // Back to top button
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('show', window.scrollY > 400);
+    });
+    backTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
