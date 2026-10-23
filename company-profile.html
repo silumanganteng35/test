@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -349,6 +349,64 @@
       transform: translateY(0);
     }
     .cp-page-card.visible:hover { transform: translateY(-4px); }
+
+    /* ===== INCLUDE ORDER / BONUS ===== */
+    .cp-bonus {
+      padding: 56px 24px 64px;
+      background: linear-gradient(to bottom, #0d0900, var(--black));
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .cp-bonus-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .bonus-card {
+      position: relative;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,197,24,0.25);
+      border-radius: 18px;
+      padding: 32px 28px 28px;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .bonus-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--yellow));
+    }
+    .bonus-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--yellow);
+      box-shadow: 0 16px 40px rgba(255,214,0,0.12);
+    }
+    .bonus-card.featured { background: rgba(245,197,24,0.06); }
+    .bonus-title {
+      font-size: clamp(18px, 2.4vw, 22px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: var(--yellow);
+    }
+    .bonus-lead { color: var(--gray); font-size: 14.5px; line-height: 1.6; margin-bottom: 16px; }
+    .bonus-lead strong { color: #fff; }
+    .bonus-list { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .bonus-list li {
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .bonus-note { color: var(--gray); font-size: 14px; line-height: 1.65; margin: 0 0 10px; }
+    .bonus-note strong { color: #fff; }
+    @media (max-width: 640px) {
+      .cp-bonus { padding: 40px 16px 48px; }
+      .bonus-card { padding: 28px 20px 22px; }
+    }
   </style>
 </head>
 <body>
@@ -454,6 +512,37 @@
     </div>
   </section>
 
+
+  <!-- INCLUDE ORDER -->
+  <section class="cp-bonus" id="include-order">
+    <div class="cp-bonus-grid">
+
+      <article class="bonus-card">
+        <h2 class="bonus-title">INCLUDE ORDER MINIM 12 PCS &#127873;</h2>
+        <p class="bonus-lead">Untuk setiap pemesanan <strong>minimal 12 pcs</strong>, kamu akan mendapatkan:</p>
+        <ul class="bonus-list">
+          <li>&#10024; FREE STICKER SESUAI DESAIN</li>
+          <li>&#128230; PACKING RAPI &amp; AMAN</li>
+        </ul>
+        <p class="bonus-note">Terima kasih sudah mempercayakan kebutuhan apparel dan sablon Anda kepada <strong>Joglo Screenprinting</strong> &#128588;</p>
+        <p class="bonus-note">Silakan hubungi kami untuk konsultasi dan pemesanan &#128522;</p>
+      </article>
+
+      <article class="bonus-card featured">
+        <h2 class="bonus-title">&#128230; INCLUDE ORDER MINIM 50 PCS &#128230;</h2>
+        <p class="bonus-lead">Untuk setiap pemesanan <strong>minimal 50 pcs</strong>, kamu akan mendapatkan:</p>
+        <ul class="bonus-list">
+          <li>&#10024; <strong>FREE STICKER</strong> sesuai desain</li>
+          <li>&#127912; <strong>FREE DESAIN</strong></li>
+          <li>&#127991;&#65039; <strong>FREE HANGTAG</strong></li>
+          <li>&#128085; <strong>FREE KAOS POLOS 1 PCS</strong></li>
+          <li>&#128230; <strong>PACKING RAPI &amp; AMAN MENGGUNAKAN ZIPLOCK</strong></li>
+        </ul>
+        <p class="bonus-note">Yuk, langsung konsultasikan kebutuhan sablon atau produksi kaosmu bersama <strong>Joglo Screenprinting</strong>. Terima kasih &#128588;</p>
+      </article>
+
+    </div>
+  </section>
   <!-- FOOTER -->
   <footer class="cp-foot">
     <div class="cp-foot-inner">
